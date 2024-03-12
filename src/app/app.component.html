@@ -1,46 +1,54 @@
 
-<div class="container m2">
-  <h1>Dodaj gracza</h1>
-  <form (ngSubmit)="addPlayer(game.value, firstName.value, lastName.value, nickName.value)" #form="ngForm">
-    <div class="form-group">
-      <label>
-        Imię:
-        <input type="text" #firstName required />
-      </label>
+<div class="container mt-5 mb-5 d-flex justify-content-center">
+  <div class="card px-1 py-4 card-body">
+   <form (ngSubmit)="addPlayer(game.value, firstName.value, lastName.value, nickName.value)" #form="ngForm">
+    <h1>Dodaj gracza</h1>
+      <div class="row">
+        <div class="col-sm-12 m-1">
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Imię gracza" #firstName required > 
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-      <label>
-        Nazwisko:
-        <input type="text" #lastName required />
-      </label>
+    
+    <div class="row">
+      <div class="col-sm-12 m-1">
+          <div class="form-group">
+              <input class="form-control" type="text" placeholder="Nazwisko gracza" #lastName required > 
+          </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 m-1">
+        <div class="form-group">
+            <div class="input-group"> 
+                <input class="form-control" type="text" placeholder="Nick Gracza" #nickName required > 
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-      <label>
-        Nick:
-        <input type="text" #nickName required />
-      </label>
-    </div>
-    <div class="input-group-prepend">
-      <label>
-        Gra:
-        <select #game class="custom-select" required>
-          <option value="" disabled selected>Wybierz grę</option>
-          <option value="CS">Counter-Strike</option>
-          <option value="Valorant">Valorant</option>
-          <option value="LoL">League of Legends</option>
-        </select>
-      </label>
-    </div>
-    <button type="submit" class="btn btn-primary">Dodaj gracza</button>
-    <div *ngIf="form.invalid" class="alert alert-danger mt-2">
-      <p>Nie podano wszystkich danych!</p>
-    </div>
+</div>
+<div class="row">
+  <div class="col-sm-12 m-1 mt-3 mb-3">
+      <div class="form-group">
+          <div class="input-group">
+              <select #game class="form-select" required>
+                  <option value="" disabled selected>Wybierz grę</option>
+                  <option value="CS">Counter-Strike</option>
+                  <option value="Valorant">Valorant</option>
+                  <option value="LoL">League of Legends</option>
+              </select>
+          </div>
+      </div>
+  </div>
+</div>
+    <button type="submit" class="btn btn-primary btn-block confirm-button">Dodaj gracza</button>
   </form>
-
-  <!-- Rest of the code... -->
+  </div> 
 </div>
 
-  <h2>Gracze Counter-Strike</h2>
+
+<h2 class="card-title mb-3">Gracze League of Legends</h2>
+  <!-- Tabela graczy CS'a -->
   <table class="table">
     <thead>
       <tr>
