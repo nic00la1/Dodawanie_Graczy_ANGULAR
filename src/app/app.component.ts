@@ -86,25 +86,47 @@ export class AppComponent {
     this.displayPlayers(); // wyświetl listę graczy
   }
 
-  // Metoda edycji gracza za pomoca write boxa
- editPlayer(game: string, id: number, firstName: string, lastName: string, nickName: string) {
-  prompt("Podaj nowe imie gracza", firstName);
-  prompt("Podaj nowe nazwisko gracza", lastName);
-  prompt("Podaj nowy nick gracza", nickName);
+  // TODO: dodać metodę do edycji gracza (zmiany imienia, nazwiska, nicku) 
+  // za pomocą prompt
 
-  if (!game || !firstName || !lastName || !nickName) {
-    alert("Wszystkie pola muszą być wypełnione!");
-    return;
+  editPlayer(game: string, id: number) {
+    let playerList;
+    switch (game) {
+      case 'CS':
+        playerList = this.csPlayers;
+        break;
+      case 'Valorant':
+        playerList = this.valorantPlayers;
+        break;
+      case 'LoL':
+        playerList = this.lolPlayers;
+        break;
+      default:
+        alert("Nieznana gra!");
+        return;
+    }
+
+    const index = playerList.findIndex(p => p.id === id);
+    if (index === -1) {
+      alert("Nie znaleziono gracza o podanym id!");
+      return;
+    }
+
+    const newFirstName = prompt("Podaj nowe imię:");
+    const newLastName = prompt("Podaj nowe nazwisko:");
+    const newNickName = prompt("Podaj nowy nick:");
+
+    if (!newFirstName || !newLastName || !newNickName) {
+      alert("Wszystkie pola muszą być wypełnione!");
+      return;
+    }
+
+    playerList[index].name = newFirstName;
+    playerList[index].surname = newLastName;
+    playerList[index].nickname = newNickName;
+
+    console.log(`Zmieniono gracza z ${game}`);
+    this.displayPlayers(); // wyświetl listę graczy
   }
-
-  if (null) {
-    alert("Nie znaleziono gracza o podanym id!");
-    return;
-  }
-
-
-  alert("Edytowano gracza");
-  // edytuj gracza w tablicy
- }
 
 }
