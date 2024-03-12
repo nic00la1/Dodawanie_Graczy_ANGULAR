@@ -86,5 +86,25 @@ export class AppComponent {
     this.displayPlayers(); // wyświetl listę graczy
   }
 
-  
+  // Metoda edycji gracza za pomoca write boxa
+ editPlayer(game: string, id: number, firstName: string, lastName: string, nickName: string) {
+  prompt("Podaj nowe imie gracza", firstName);
+  prompt("Podaj nowe nazwisko gracza", lastName);
+  prompt("Podaj nowy nick gracza", nickName);
+
+  if (!game || !firstName || !lastName || !nickName) {
+    alert("Wszystkie pola muszą być wypełnione!");
+    return;
+  }
+
+  if (null) {
+    alert("Nie znaleziono gracza o podanym id!");
+    return;
+  }
+
+
+  alert("Edytowano gracza");
+  // edytuj gracza w tablicy
+ }
+
 }
