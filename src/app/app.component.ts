@@ -18,7 +18,7 @@ export class AppComponent {
 
   addPlayer(game: string, firstName: string, lastName: string, nickName: string) {
     if (!game || !firstName || !lastName || !nickName) {
-      console.log("Nie podano wszystkich danych!");
+      alert("Wszystkie pola muszą być wypełnione!");
       return;
     } 
 
@@ -34,19 +34,19 @@ export class AppComponent {
         playerList = this.lolPlayers;
         break;
       default:
-        console.log("Nieznana gra!");
+        alert("Nieznana gra!");
         return;
     }
 
     if (playerList.length >= 5) {
-      console.log("Nie można dodać więcej graczy do tej gry!");
+      alert("Nie można dodać więcej graczy do tej gry!");
       return;
     }
 
-    const id = playerList.length + 1;
+     const id = playerList.length + 1;
     playerList.push(new Player(id, firstName, lastName, nickName));
     
-    console.log(`Dodano gracza do ${game}`);
+    alert(`Dodano gracza do ${game}`);
 
     this.displayPlayers(); // wyświetl listę graczy
     
@@ -58,4 +58,33 @@ export class AppComponent {
     console.log("Gracze LoL:", this.lolPlayers);
   }
 
+  deletePlayer(game: string, id: number) {
+    let playerList;
+    switch (game) {
+      case 'CS':
+        playerList = this.csPlayers;
+        break;
+      case 'Valorant':
+        playerList = this.valorantPlayers;
+        break;
+      case 'LoL':
+        playerList = this.lolPlayers;
+        break;
+      default:
+        alert("Nieznana gra!");
+        return;
+    }
+
+    const index = playerList.findIndex(p => p.id === id);
+    if (index === -1) {
+      alert("Nie znaleziono gracza o podanym id!");
+      return;
+    }
+
+    playerList.splice(index, 1);
+    console.log(`Usunięto gracza z ${game}`);
+    this.displayPlayers(); // wyświetl listę graczy
+  }
+
+  
 }
