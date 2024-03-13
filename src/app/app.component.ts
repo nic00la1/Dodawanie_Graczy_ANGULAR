@@ -9,18 +9,23 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, RouterOutlet, FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   csPlayers: Player[] = [];
   valorantPlayers: Player[] = [];
   lolPlayers: Player[] = [];
 
-  addPlayer(game: string, firstName: string, lastName: string, nickName: string) {
+  addPlayer(
+    game: string,
+    firstName: string,
+    lastName: string,
+    nickName: string
+  ) {
     if (!game || !firstName || !lastName || !nickName) {
-      alert("Wszystkie pola muszą być wypełnione!");
+      alert('Wszystkie pola muszą być wypełnione!');
       return;
-    } 
+    }
 
     let playerList;
     switch (game) {
@@ -34,28 +39,28 @@ export class AppComponent {
         playerList = this.lolPlayers;
         break;
       default:
-        alert("Nieznana gra!");
+        alert('Nieznana gra!');
         return;
     }
 
     if (playerList.length >= 5) {
-      alert("Nie można dodać więcej graczy do tej gry!");
+      alert('Nie można dodać więcej graczy do tej gry!');
       return;
     }
 
-     const id = playerList.length + 1;
+
+    const id = playerList.length > 0 ? playerList[playerList.length - 1].id + 1 : 1; // jeśli lista nie jest pusta, to id = ostatni id + 1, w przeciwnym wypadku id = 1
     playerList.push(new Player(id, firstName, lastName, nickName));
-    
+
     alert(`Dodano gracza do ${game}`);
 
     this.displayPlayers(); // wyświetl listę graczy
-    
   }
 
   displayPlayers() {
-    console.log("Gracze CS:", this.csPlayers);
-    console.log("Gracze Valorant:", this.valorantPlayers);
-    console.log("Gracze LoL:", this.lolPlayers);
+    console.log('Gracze CS:', this.csPlayers);
+    console.log('Gracze Valorant:', this.valorantPlayers);
+    console.log('Gracze LoL:', this.lolPlayers);
   }
 
   deletePlayer(game: string, id: number) {
@@ -71,13 +76,13 @@ export class AppComponent {
         playerList = this.lolPlayers;
         break;
       default:
-        alert("Nieznana gra!");
+        alert('Nieznana gra!');
         return;
     }
 
-    const index = playerList.findIndex(p => p.id === id);
+    const index = playerList.findIndex((p) => p.id === id);
     if (index === -1) {
-      alert("Nie znaleziono gracza o podanym id!");
+      alert('Nie znaleziono gracza o podanym id!');
       return;
     }
 
@@ -86,7 +91,7 @@ export class AppComponent {
     this.displayPlayers(); // wyświetl listę graczy
   }
 
-  // TODO: dodać metodę do edycji gracza (zmiany imienia, nazwiska, nicku) 
+  // TODO: dodać metodę do edycji gracza (zmiany imienia, nazwiska, nicku)
   // za pomocą prompt
 
   editPlayer(game: string, id: number) {
@@ -102,22 +107,22 @@ export class AppComponent {
         playerList = this.lolPlayers;
         break;
       default:
-        alert("Nieznana gra!");
+        alert('Nieznana gra!');
         return;
     }
 
-    const index = playerList.findIndex(p => p.id === id);
+    const index = playerList.findIndex((p) => p.id === id);
     if (index === -1) {
-      alert("Nie znaleziono gracza o podanym id!");
+      alert('Nie znaleziono gracza o podanym id!');
       return;
     }
 
-    const newFirstName = prompt("Podaj nowe imię:");
-    const newLastName = prompt("Podaj nowe nazwisko:");
-    const newNickName = prompt("Podaj nowy nick:");
+    const newFirstName = prompt('Podaj nowe imię:');
+    const newLastName = prompt('Podaj nowe nazwisko:');
+    const newNickName = prompt('Podaj nowy nick:');
 
     if (!newFirstName || !newLastName || !newNickName) {
-      alert("Wszystkie pola muszą być wypełnione!");
+      alert('Wszystkie pola muszą być wypełnione!');
       return;
     }
 
@@ -128,5 +133,4 @@ export class AppComponent {
     console.log(`Zmieniono gracza z ${game}`);
     this.displayPlayers(); // wyświetl listę graczy
   }
-
 }
